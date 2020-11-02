@@ -1,8 +1,6 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
 const fs = require("fs")
-const express = require("express")
-const app = express()
 
 const client = new Discord.Client();
 
@@ -53,7 +51,6 @@ function Unregister(message) {
     }
 
 }
-app.get("/", (req, res) => {res.send("JE suis pas un site web moi")})
 
 client.on("message", function (message) {
     if (message.author.bot) return;
@@ -84,7 +81,3 @@ client.on("message", function (message) {
 
 
 client.login(config.BOT_TOKEN);
-
-app.listen(3000 || process.env.PORT, () => {
-    console.log("BOT is up")
-})
