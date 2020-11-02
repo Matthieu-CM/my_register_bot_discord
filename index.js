@@ -66,6 +66,8 @@ client.on("message", function (message) {
         Unregister(message)
     } else if (command === "cerfio") {
         message.reply("Oui maitre")
+    } else if (command === "help") {
+        message.reply("```\r!register:\tPermet de s'enregistrer pour ce soir\r!unregister:\tPermet d'annuler sa participation\r!list:\tPermet d'afficher la liste des participants\r!clear:\rPermet de réinitialiser la liste des participants\r!help: Pas besoin de dire plus\r\rBot made by Zuma Torney <3\r```")
     } else if (command === "buzz") {
         message.reply("nik ta mere")
     } else if (command === "clear") {
