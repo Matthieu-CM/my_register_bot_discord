@@ -85,6 +85,6 @@ client.on("message", function (message) {
 
 client.login(config.BOT_TOKEN);
 
-app.listen(3000 || process.env.port, () => {
+app.listen(3000 || process.env.PORT, () => {
     console.log("BOT is up")
 })
