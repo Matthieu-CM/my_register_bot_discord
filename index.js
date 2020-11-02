@@ -20,8 +20,9 @@ function List(message) {
     if (registered.today.length === 0) {
         message.reply("Personne n'a dit être disponible, RT si t triste")
     } else {
-        let response = "```"
+        let response = "```\n"
         registered.today.forEach((element) => {
+            console.log(element)
             response = response + element + "\n"
         })
         response = response + "```"
