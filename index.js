@@ -17,9 +17,9 @@ console.log(process.env.CHANNEL_ID)
 console.log("BOT IS UP")
 client.on("message", function (message) {
     if (message.author.bot) return;
-    if (message.author.username === "bod") {
-        message.reply("Toi je t'aime pas")
-    }
+    // if (message.author.username === "bod") {
+    //     message.reply("Toi je t'aime pas")
+    // }
     if (!message.content.startsWith(prefix)) return;
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
