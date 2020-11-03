@@ -17,9 +17,6 @@ console.log(process.env.CHANNEL_ID)
 console.log("BOT IS UP")
 client.on("message", function (message) {
     if (message.author.bot) return;
-    // if (message.author.username === "bod") {
-    //     message.reply("Toi je t'aime pas")
-    // }
     if (!message.content.startsWith(prefix)) return;
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
@@ -49,9 +46,9 @@ client.on("message", function (message) {
     } else if (command === "objection") {
         Music.playMusic(client, message, "https://www.youtube.com/watch?v=fR4P8o95WPA")
     } else if (command === "snk") {
-        Music.playMusic(client, message, "https://youtu.be/pa00z_Bp2j4?t=161")     
+        Music.playMusic(client, message, "https://youtu.be/pa00z_Bp2j4?t=161")
     } else if (command === "leave") {
-        Music.leave(message)     
+        Music.leave(message)
     } else if (command === "add") {
         Add.Add(message, args, command)
     } else {
