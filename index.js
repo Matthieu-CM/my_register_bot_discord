@@ -21,10 +21,13 @@ client.on("message", function (message) {
         message.reply("Toi je t'aime pas")
     }
     if (!message.content.startsWith(prefix)) return;
-    if (message.channel.id !== process.env.CHANNEL_ID) return;
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
+    if (command === "code") {
+        Code.Code(message, args)
+    }
+    if (message.channel.id !== process.env.CHANNEL_ID) return;
     console.log("Command => ", message.author.username, command, args)
     if (command === "register") {
         Registration.Register(message)
@@ -43,8 +46,6 @@ client.on("message", function (message) {
         message.channel.send("Liste nettoyé")
     } else if (command === "list") {
         List.List(message)
-    } else if (command === "code") {
-        Code.Code(message, args)
     } else if (command === "objection") {
         Music.playMusic(client, message, "https://www.youtube.com/watch?v=fR4P8o95WPA")
     } else if (command === "snk") {
