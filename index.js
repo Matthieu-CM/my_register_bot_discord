@@ -52,13 +52,28 @@ function Unregister(message) {
 
 }
 
+function Code(message, args) {
+    let registered = require("./registered.json")
+    if (args.length === 0) {
+        message.reply("Le code de la partie est :\n```\r" + registered.code + "\r```")
+    } else {
+        let code = args[0]
+        if (code.length === 6 && /^[a-zA-Z()]+$/.test(code)) {
+            registered.code = code.toUpperCase()
+            message.reply("Code de partie enregistré Bonne Partie :)")
+        } else {
+            message.reply("Ceci n'est pas un code valide")
+        }
+    }
+}
+
 client.on("message", function (message) {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
     const commandBody = message.content.slice(prefix.length);
   const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
-    console.log(command)
+    console.log("Command => ", message.author.username, command, args)
     if (command === "register") {
         Register(message)
     } else if (command === "unregister") {
@@ -75,8 +90,10 @@ client.on("message", function (message) {
         updateRegistered(registered)
         message.reply("Liste nettoyé")
     } else if (command === "list") {
-       List(message)
-    }
+        List(message)
+     } else if (command === "code") {
+        Code(message, args)
+     }
 });
 
 
