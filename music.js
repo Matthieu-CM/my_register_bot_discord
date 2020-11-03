@@ -18,7 +18,7 @@ async function playMusic(client, message, link) {
     
     const serverQueue = queue.get(message.guild.id);
     
-    const channel = client.channels.fetch("765283586726690850");
+    const channel = client.channels.fetch(process.env.VOICE_CHANNEL_ID);
     const voiceChannel = message.member.voice.channel;
     let res = channelVerif(voiceChannel, message, channel)
     console.log(res)

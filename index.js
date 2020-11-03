@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
 const fs = require("fs")
-
+require('dotenv').config()
 
 const client = new Discord.Client();
 
