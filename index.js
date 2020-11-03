@@ -70,6 +70,7 @@ function Code(message, args) {
 client.on("message", function (message) {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
+    if (message.channel.id !== '772915066261209090') return;
     const commandBody = message.content.slice(prefix.length);
   const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
