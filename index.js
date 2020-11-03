@@ -18,7 +18,7 @@ client.on("message", function (message) {
         message.reply("Toi je t'aime pas")
     }
     if (!message.content.startsWith(prefix)) return;
-    // if (message.channel.id !== '772915066261209090') return;
+    if (message.channel.id !== process.env.channel_id) return;
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
@@ -48,7 +48,22 @@ client.on("message", function (message) {
         Music.playMusic(client, message, "https://youtu.be/pa00z_Bp2j4?t=161")     
     } else if (command === "leave") {
         Music.leave(message)     
-}
+    } else if (command === "add") {
+        if (args[0] !== undefined && args[1] !== undefined) {
+            let register = require("./registered.json")
+            register[args[0]] = args[1]
+            fs.writeFile("./registered.json", JSON.stringify(register), function (err) {
+                if (err) throw err;
+                console.log('Saved!');
+              });
+            message.channel.send("Command added")
+        }
+    } else {
+        let register = require("./registered.json")
+        if (register[command] !== undefined) {
+            Music.playMusic(client, message, register[command])
+        }
+    }
 });
 
 
