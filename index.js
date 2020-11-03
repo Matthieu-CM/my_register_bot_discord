@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
-const fs = require("fs")
+
 require('dotenv').config()
 
 const client = new Discord.Client();
@@ -10,7 +10,8 @@ const prefix = "!";
 const Code = require("./code")
 const List = require("./list")
 const Registration = require("./registration")
-const Music = require("./music")
+const Music = require("./music");
+const Add = require("./add");
 
 function Call(message) {
     let registered = require("./registered.json");
@@ -73,19 +74,14 @@ client.on("message", function (message) {
     } else if (command === "leave") {
         Music.leave(message);
     } else if (command === "add") {
-        if (args[0] !== undefined && args[1] !== undefined) {
-            let register = require("./registered.json");
-            register[args[0]] = args[1];
-            fs.writeFile("./registered.json", JSON.stringify(register), function (err) {
-                if (err) throw err;
-                console.log('Saved!');
-              });
-            message.channel.send("Command added");
-        }
+        Add.Add(message, args, command)
     } else {
-        let register = require("./registered.json");
+        let register = require("./registered.json")
+        console.log(register[command])
         if (register[command] !== undefined) {
             Music.playMusic(client, message, register[command])
+        } else {
+            message.channel.send("Commande introuvable")
         }
     }*/
 });
