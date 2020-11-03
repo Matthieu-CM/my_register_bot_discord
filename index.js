@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
-
+const fs = require("fs")
+require('dotenv').config()
 
 const client = new Discord.Client();
 
@@ -28,13 +29,15 @@ function Call(message) {
     }
 }
 
+console.log(process.env.CHANNEL_ID)
+console.log("BOT IS UP")
 client.on("message", function (message) {
     if (message.author.bot) return;
     if (message.author.username === "bod") {
         message.reply("Toi je t'aime pas");
     }
     if (!message.content.startsWith(prefix)) return;
-    if (message.channel.id !== process.env.channel_id) return;
+    if (message.channel.id !== process.env.CHANNEL_ID) return;
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
@@ -43,9 +46,11 @@ client.on("message", function (message) {
         Registration.Register(message);
     } else if (command === "unregister") {
         Registration.Unregister(message);
-    } else if (command === "call") {
+    }
+     if (command === "call") {
         Call(message);
-    } else if (command === "cerfio") {
+    }
+    /* else if (command === "cerfio") {
         message.channel.send("Oui maitre");
     } else if (command === "help") {
         message.channel.send("```\r!register:\tPermet de s'enregistrer pour ce soir\r!unregister:\tPermet d'annuler sa participation\r!list:\tPermet d'afficher la liste des participants\r!clear:\rPermet de réinitialiser la liste des participants\r!help: Pas besoin de dire plus\r\rBot made by Zuma Torney <3\r```");
@@ -56,9 +61,10 @@ client.on("message", function (message) {
         registered.today = [];
         Registration.updateRegistered(registered);
         message.channel.send("Liste nettoyé");
-    } else if (command === "list") {
+    }*/
+    else if (command === "list") {
         List.List(message);
-    } else if (command === "code") {
+    }/* else if (command === "code") {
         Code.Code(message, args);
     } else if (command === "objection") {
         Music.playMusic(client, message, "https://www.youtube.com/watch?v=fR4P8o95WPA");
@@ -81,8 +87,7 @@ client.on("message", function (message) {
         if (register[command] !== undefined) {
             Music.playMusic(client, message, register[command])
         }
-    }
+    }*/
 });
-
 
 client.login(config.BOT_TOKEN);
