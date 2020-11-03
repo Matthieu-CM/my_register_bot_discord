@@ -12,7 +12,8 @@ const List = require("./list")
 const Registration = require("./registration")
 const Music = require("./music")
 
-
+console.log(process.env.CHANNEL_ID)
+console.log("BOT IS UP")
 client.on("message", function (message) {
     if (message.author.bot) return;
     if (message.author.username === "bod") {
