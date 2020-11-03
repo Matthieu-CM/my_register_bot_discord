@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const config = require("./config.json");
+const fs = require("fs")
 
 
 const client = new Discord.Client();
@@ -18,7 +19,7 @@ client.on("message", function (message) {
         message.reply("Toi je t'aime pas")
     }
     if (!message.content.startsWith(prefix)) return;
-    if (message.channel.id !== process.env.channel_id) return;
+    if (message.channel.id !== process.env.CHANNEL_ID) return;
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
