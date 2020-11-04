@@ -13,6 +13,10 @@ const Registration = require("./registration")
 const Music = require("./music");
 const Add = require("./add");
 
+var shutdown = False;
+
+var admin = ["Zuma Torney", "Cerfio", "Rajie", "Meruto-kun"]
+
 console.log(process.env.CHANNEL_ID)
 console.log("BOT IS UP and removed reply to baptiste")
 client.on("message", function (message) {
@@ -21,6 +25,12 @@ client.on("message", function (message) {
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
+    if (command === "shutdown" && (admin.indexOf(message.author.username) !== -1)) {
+        shutdown = True;
+    } else if (command === "start" && (admin.indexOf(message.author.username) !== -1)) {
+        shutdown = False;
+    }
+    if (shutdown === True) return;
     if (command === "code") {
         Code.Code(message, args)
     }
