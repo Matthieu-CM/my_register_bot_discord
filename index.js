@@ -14,7 +14,7 @@ const Music = require("./music");
 const Add = require("./add");
 
 console.log(process.env.CHANNEL_ID)
-console.log("BOT IS UP")
+console.log("BOT IS UP and removed reply to baptiste")
 client.on("message", function (message) {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
