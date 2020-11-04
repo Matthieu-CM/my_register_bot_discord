@@ -13,7 +13,7 @@ const Registration = require("./registration")
 const Music = require("./music");
 const Add = require("./add");
 
-var shutdown = False;
+var shutdown = false;
 
 var admin = ["Zuma Torney", "Cerfio", "Rajie", "Meruto-kun"]
 
@@ -26,11 +26,11 @@ client.on("message", function (message) {
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
     if (command === "shutdown" && (admin.indexOf(message.author.username) !== -1)) {
-        shutdown = True;
+        shutdown = true;
     } else if (command === "start" && (admin.indexOf(message.author.username) !== -1)) {
-        shutdown = False;
+        shutdown = false;
     }
-    if (shutdown === True) return;
+    if (shutdown === true) return;
     if (command === "code") {
         Code.Code(message, args)
     }
