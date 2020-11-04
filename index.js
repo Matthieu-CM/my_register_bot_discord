@@ -27,7 +27,7 @@ client.on("message", function (message) {
     const command = args.shift().toLowerCase();
     if (command === "shutdown" && (admin.indexOf(message.author.username) !== -1)) {
         shutdown = true;
-    } else if (command === "start" && (admin.indexOf(message.author.username) !== -1)) {
+    } else if (command === "startBot" && (admin.indexOf(message.author.username) !== -1)) {
         shutdown = false;
     }
     if (shutdown === true) return;
