@@ -25,17 +25,24 @@ client.on("message", function (message) {
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
+    console.log("Command => ", message.author.username, command, args)
     if (command === "shutdown" && (admin.indexOf(message.author.username) !== -1)) {
         shutdown = true;
-    } else if (command === "startBot" && (admin.indexOf(message.author.username) !== -1)) {
+        console.log("Bot has stopped")
+        return
+        // message.channel.send("Adieu tout le monde")
+    } else if (command === "start" && (admin.indexOf(message.author.username) !== -1)) {
         shutdown = false;
+        console.log("Bot started")
+        return
+        // message.channel.send("Me revoila, comme neuf")
     }
     if (shutdown === true) return;
     if (command === "code") {
         Code.Code(message, args)
+        return
     }
     if (message.channel.id !== process.env.CHANNEL_ID) return;
-    console.log("Command => ", message.author.username, command, args)
     if (command === "register") {
         Registration.Register(message)
     } else if (command === "unregister") {
