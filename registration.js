@@ -9,8 +9,8 @@ function updateRegistered (content) {
 
 function Register(message) {
     let registered = require("./registered.json")
-    if (registered.today.indexOf(message.author.username) === -1) {
-        registered.today.push(message.author.username)
+    if (registered.today.indexOf(message.author.username + ' ' + message.author.id) === -1) {
+        registered.today.push(message.author.username + ' ' + message.author.id)
         updateRegistered(registered)
         message.reply("Participation à ce soir enregistré");
     } else {
@@ -20,7 +20,7 @@ function Register(message) {
 
 function Unregister(message) {
     let registered = require("./registered.json")
-    let index = registered.today.indexOf(message.author.username)
+    let index = registered.today.indexOf(message.author.username + ' ' + message.author.id)
     if ( index === -1) {
         message.reply("T'a même pas dit que tu était dispo et la tu cherche à anuler ta participation frère");
     } else {
