@@ -29,20 +29,36 @@ function Call(message) {
         })
     }
 }
+var shutdown = false;
+
+var admin = ["Zuma Torney", "Cerfio", "Rajie", "Meruto-kun"]
 
 console.log(process.env.CHANNEL_ID)
-console.log("BOT IS UP")
+console.log("BOT IS UP and removed reply to baptiste")
 client.on("message", function (message) {
     if (message.author.bot) return;
-    if (message.author.username === "bod") {
-        message.reply("Toi je t'aime pas");
-    }
     if (!message.content.startsWith(prefix)) return;
-    if (message.channel.id !== process.env.CHANNEL_ID) return;
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
-    console.log("Command => ", message.author.username, command, args);
+    console.log("Command => ", message.author.username, command, args)
+    if (command === "shutdown" && (admin.indexOf(message.author.username) !== -1)) {
+        shutdown = true;
+        console.log("Bot has stopped")
+        return
+        // message.channel.send("Adieu tout le monde")
+    } else if (command === "start" && (admin.indexOf(message.author.username) !== -1)) {
+        shutdown = false;
+        console.log("Bot started")
+        return
+        // message.channel.send("Me revoila, comme neuf")
+    }
+    if (shutdown === true) return;
+    if (command === "code") {
+        Code.Code(message, args)
+        return
+    }
+    if (message.channel.id !== process.env.CHANNEL_ID) return;
     if (command === "register") {
         Registration.Register(message);
     } else if (command === "unregister") {
@@ -58,21 +74,18 @@ client.on("message", function (message) {
     } else if (command === "buzz") {
         message.channel.send("nik ta mere");
     } else if (command === "clear") {
-        let registered = require("./registered.json");
-        registered.today = [];
-        Registration.updateRegistered(registered);
-        message.channel.send("Liste nettoyé");
-    }*/
-    else if (command === "list") {
-        List.List(message);
-    }/* else if (command === "code") {
-        Code.Code(message, args);
+        let registered = require("./registered.json")
+        registered.today = []
+        Registration.updateRegistered(registered)
+        message.channel.send("Liste nettoyé")
+    } else if (command === "list") {
+        List.List(message)
     } else if (command === "objection") {
         Music.playMusic(client, message, "https://www.youtube.com/watch?v=fR4P8o95WPA");
     } else if (command === "snk") {
         Music.playMusic(client, message, "https://youtu.be/pa00z_Bp2j4?t=161")
     } else if (command === "leave") {
-        Music.leave(message);
+        Music.leave(message)
     } else if (command === "add") {
         Add.Add(message, args, command)
     } else {
