@@ -6,10 +6,10 @@ function List(message) {
     } else {
         let response = "```\n"
         registered.today.forEach((element) => {
-            console.log(element)
-            response = response + element + "\n"
+            const user = element.split(' ');
+            response = response + user[0] + "\n";
         })
-        response = response + "```"
+        response = response + "\nIl y'a " + registered.today.length + " joueurs pour ce soir" + "\n```"
         message.channel.send(response)
     }
 }

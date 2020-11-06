@@ -20,12 +20,8 @@ function Call(message) {
         message.reply("Personne n'a dit être disponible, RT si t triste");
     } else {
         registered.today.forEach((element) => {
-            // console.log(element);
-            // channel.send("<@" + message.author.id + ">");
-            // message.channel.send('<@' + 'Cerfio' + '>');
-            // console.log('author', message.id);
-            // message.channel.send(`<@Cerfio> you just got a hug`);
-            // message.channel.send(`Hey ${message.author} how's it going?`);
+            const split = element.split(' ');
+            message.channel.send("<@" + split[split.length - 1] + ">");
         })
     }
 }
@@ -66,8 +62,9 @@ client.on("message", function (message) {
     }
      if (command === "call") {
         Call(message);
-    }
-    /* else if (command === "cerfio") {
+    } else if (command === "list") {
+    List.List(message);
+    } else if (command === "cerfio") {
         message.channel.send("Oui maitre");
     } else if (command === "help") {
         message.channel.send("```\r!register:\tPermet de s'enregistrer pour ce soir\r!unregister:\tPermet d'annuler sa participation\r!list:\tPermet d'afficher la liste des participants\r!clear:\rPermet de réinitialiser la liste des participants\r!help: Pas besoin de dire plus\r\rBot made by Zuma Torney <3\r```");
@@ -78,8 +75,6 @@ client.on("message", function (message) {
         registered.today = []
         Registration.updateRegistered(registered)
         message.channel.send("Liste nettoyé")
-    } else if (command === "list") {
-        List.List(message)
     } else if (command === "objection") {
         Music.playMusic(client, message, "https://www.youtube.com/watch?v=fR4P8o95WPA");
     } else if (command === "snk") {
@@ -96,7 +91,7 @@ client.on("message", function (message) {
         } else {
             message.channel.send("Commande introuvable")
         }
-    }*/
+    }
 });
 
 client.login(config.BOT_TOKEN);
