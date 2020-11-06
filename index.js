@@ -60,10 +60,10 @@ client.on("message", function (message) {
     } else if (command === "unregister") {
         Registration.Unregister(message);
     }
-     if (command === "call") {
+    else if (command === "call") {
         Call(message);
     } else if (command === "list") {
-    List.List(message);
+        List.List(message);
     } else if (command === "cerfio") {
         message.channel.send("Oui maitre");
     } else if (command === "help") {
