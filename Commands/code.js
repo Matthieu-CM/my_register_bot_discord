@@ -1,6 +1,6 @@
 
 function Code(message, args) {
-    let registered = require("./registered.json")
+    let registered = require("../registered.json")
     if (args.length === 0) {
         message.channel.send("Le code de la partie est :\n```\r" + registered.code + "\r```")
     } else {

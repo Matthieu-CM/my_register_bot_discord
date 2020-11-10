@@ -1,5 +1,5 @@
 function List(message) {
-    let registered = require("./registered.json")
+    let registered = require("../registered.json")
     console.log(registered.today)
     if (registered.today.length === 0) {
         message.channel.send("Personne n'a dit être disponible, RT si t triste")

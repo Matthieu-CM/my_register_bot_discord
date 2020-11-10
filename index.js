@@ -7,24 +7,14 @@ const client = new Discord.Client();
 
 const prefix = "!";
 
-const Code = require("./code")
-const List = require("./list")
+const Code = require("./Commands/code")
+const List = require("./Commands/list")
 const Registration = require("./registration")
-const Music = require("./music");
-const Add = require("./add");
+const Music = require("./Commands/music");
+const Add = require("./Commands/add");
+const { botStatus } = require("./Commands/BotStatus");
+const { Call } = require("./Commands/call");
 
-function Call(message) {
-    let registered = require("./registered.json");
-    console.log(registered.today);
-    if (registered.today.length === 0) {
-        message.reply("Personne n'a dit être disponible, RT si t triste");
-    } else {
-        registered.today.forEach((element) => {
-            const split = element.split(' ');
-            message.channel.send("<@" + split[split.length - 1] + ">");
-        })
-    }
-}
 var shutdown = false;
 
 var admin = ["Zuma Torney", "Cerfio", "Rajie", "Meruto-kun"]
@@ -35,18 +25,8 @@ client.on("message", function (message) {
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
-    console.log("Command => ", message.author.username, command, args)
-    if (command === "shutdown" && (admin.indexOf(message.author.username) !== -1)) {
-        shutdown = true;
-        console.log("Bot has stopped")
-        return
-        // message.channel.send("Adieu tout le monde")
-    } else if (command === "start" && (admin.indexOf(message.author.username) !== -1)) {
-        shutdown = false;
-        console.log("Bot started")
-        return
-        // message.channel.send("Me revoila, comme neuf")
-    }
+    console.log("Command => ", message.author.username, command)
+    shutdown = botStatus(command, admin, shutdown, message)
     if (shutdown === true) return;
     if (command === "code") {
         Code.Code(message, args)
@@ -59,7 +39,7 @@ client.on("message", function (message) {
         Registration.Unregister(message);
     }
     else if (command === "call") {
-        Call(message);
+        Call.call(message, author)
     } else if (command === "list") {
         List.List(message);
     } else if (command === "cerfio") {
