@@ -35,6 +35,7 @@ client.on("message", function (message) {
     const commandBody = message.content.slice(prefix.length);
     const args = commandBody.split(' ');
     const command = args.shift().toLowerCase();
+<<<<<<< Updated upstream
     console.log("Command => ", message.author.username, command, args)
     if (command === "shutdown" && (admin.indexOf(message.author.username) !== -1)) {
         shutdown = true;
@@ -52,6 +53,8 @@ client.on("message", function (message) {
         Code.Code(message, args)
         return
     }
+=======
+>>>>>>> Stashed changes
     if (message.channel.id !== process.env.CHANNEL_ID) return;
     if (command === "register") {
         Registration.Register(message);
