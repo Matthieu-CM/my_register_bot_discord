@@ -37,7 +37,7 @@ client.on("message", function (message) {
         Registration.Register(message);
     } else if (command === "unregister") {
         Registration.Unregister(message);
-    } else if (command === "showJSON") {
+    } else if (command === "showjson") {
         let registered = require("./registered.json")
         console.log(registered)
     } else if (command === "call") {
