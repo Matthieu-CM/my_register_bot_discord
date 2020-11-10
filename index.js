@@ -37,8 +37,10 @@ client.on("message", function (message) {
         Registration.Register(message);
     } else if (command === "unregister") {
         Registration.Unregister(message);
-    }
-    else if (command === "call") {
+    } else if (command === "showJSON") {
+        let registered = require("./registered.json")
+        console.log(registered)
+    } else if (command === "call") {
         Call.call(message, author)
     } else if (command === "list") {
         List.List(message);
