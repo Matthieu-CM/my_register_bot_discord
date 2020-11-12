@@ -19,6 +19,13 @@ var shutdown = false;
 
 var admin = ["Zuma Torney", "Cerfio", "Rajie", "Meruto-kun"]
 
+setTimeout(() => {
+    let registered = require("./registered.json")
+        registered.today = []
+        Registration.updateRegistered(registered)
+        message.channel.send("Liste nettoyé")
+}, 1000 * 60 * 60 * 24)
+
 client.on("message", function (message) {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
