@@ -23,10 +23,12 @@ setTimeout(() => {
     let registered = require("./registered.json")
         registered.today = []
         Registration.updateRegistered(registered)
-        message.channel.send("Liste nettoyé")
 }, 1000 * 60 * 60 * 24)
 
+console.log("UP")
+
 client.on("message", function (message) {
+    try {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
     const commandBody = message.content.slice(prefix.length);
@@ -48,7 +50,7 @@ client.on("message", function (message) {
         let registered = require("./registered.json")
         console.log(registered)
     } else if (command === "call") {
-        Call.call(message, author)
+        Call(message)
     } else if (command === "list") {
         List.List(message);
     } else if (command === "cerfio") {
@@ -79,6 +81,10 @@ client.on("message", function (message) {
             message.channel.send("Commande introuvable")
         }
     }
+} catch (e) {
+    console.log(e)
+    message.channel.send("Le bot à crashé sur cette commande")
+}
 });
 
 client.login(config.BOT_TOKEN);

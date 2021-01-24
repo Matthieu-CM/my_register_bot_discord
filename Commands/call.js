@@ -1,5 +1,7 @@
-function Call(message, author) {
-    let registered = require("./registered.json");
+var admin = ["Zuma Torney", "Cerfio", "Rajie", "Meruto-kun"]
+
+function Call(message) {
+    let registered = require("../registered.json");
     console.log(registered.today);
     if (registered.today.length === 0 && message.author.username.indexOf(admin) !== -1) {
         message.reply("Personne n'a dit être disponible, RT si t triste");
